@@ -120,6 +120,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "clang/AST/ASTConsumer.h"
 #include "clang/AST/ASTContext.h"
+#include "clang/AST/RawCommentList.h"
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclBase.h"
 #include "clang/AST/DeclTemplate.h"
@@ -3659,6 +3660,23 @@ class IwyuAstConsumer
             // Check if we're the decl with the smallest line number.
             if (decl == first_decl)
               definitely_keep_fwd_decl = true;
+          }
+        }
+      } else {
+        ASTContext& ctx = decl_to_fwd_declare->getASTContext();
+        const clang::RawComment* declComment = ctx.getRawCommentForAnyRedecl(decl);
+        if (declComment != nullptr)
+        {
+          clang::SourceManager* sm = GlobalSourceManager();
+          clang::SourceRange range = declComment->getSourceRange();
+
+          clang::PresumedLoc startPos = sm->getPresumedLoc(range.getBegin());
+          clang::PresumedLoc endPos = sm->getPresumedLoc(range.getEnd());
+
+          StringRef rawText = declComment->getRawText(*sm);
+          if (rawText.find("IWYU pragma: keep") != StringRef::npos)
+          {
+            definitely_keep_fwd_decl = true;
           }
         }
       }

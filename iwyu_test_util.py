@@ -85,6 +85,10 @@ _IWYU_PATHS = [
     '../../../../../build/bin/Release',
     '../../../../../build/bin/MinSizeRel',
     '../../../../../build/bin/RelWithDebInfo',
+    '../../../../../build/x64/bin/Debug',
+    '../../../../../build/x64/bin/Release',
+    '../../../../../build/x64/bin/MinSizeRel',
+    '../../../../../build/x64/bin/RelWithDebInfo',
     ]
 
 
