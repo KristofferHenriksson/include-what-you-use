@@ -12,10 +12,10 @@ This pragma applies to a single `#include` directive or forward declaration. It 
     main.cc:
       #include <vector> // IWYU pragma: keep
 
-     /// IWYU pragma: keep
+     // IWYU pragma: keep
      class ForwardDeclaration;
 
-In this case, `std::vector` isn't used, so `<vector>` would normally be discarded, but the pragma instructs IWYU to leave it. Similarly the class ForwardDeclaration isn't used but is kept because of the pragma. Note the presence of three slashes on the forward declaration to mark this as a doxygen style comment. `//! IWYU pragma: keep` will also work.
+In this case, `std::vector` isn't used, so `<vector>` would normally be discarded, but the pragma instructs IWYU to leave it. Similarly the class ForwardDeclaration isn't used but is kept because of the pragma.
 
 
 ### IWYU pragma: export ###
