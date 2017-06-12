@@ -1,4 +1,4 @@
-/// IWYU pragma: keep
+// IWYU pragma: keep
 class ForwardDeclared;
 
 /**** IWYU_SUMMARY
