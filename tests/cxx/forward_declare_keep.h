@@ -1,5 +1,6 @@
-// IWYU pragma: keep
-class ForwardDeclared;
+
+class ForwardDeclared; // IWYU pragma: keep
+class ForwardDeclared2;  /* IWYU pragma: keep */
 
 /**** IWYU_SUMMARY
 

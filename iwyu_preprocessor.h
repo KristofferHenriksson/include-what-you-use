@@ -88,6 +88,11 @@ using std::stack;
 using std::string;
 using std::vector;
 
+// For a particular source line that source_location points to,
+// returns true if the given text occurs on the line.
+// (Case sensitive.)
+bool LineHasText(clang::SourceLocation source_location, clang::StringRef text);
+
 class IwyuPreprocessorInfo : public clang::PPCallbacks,
                              public clang::CommentHandler {
  public:

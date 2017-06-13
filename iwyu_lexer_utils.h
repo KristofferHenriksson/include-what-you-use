@@ -46,7 +46,7 @@ class SourceManagerCharacterDataGetter : public CharacterDataGetterInterface {
 };
 
 // Returns the source-code line from the current location until \n.
-string GetSourceTextUntilEndOfLine(
+clang::StringRef GetSourceTextUntilEndOfLine(
     clang::SourceLocation start_loc,
     const CharacterDataGetterInterface& data_getter);
 

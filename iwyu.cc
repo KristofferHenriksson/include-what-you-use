@@ -3663,21 +3663,11 @@ class IwyuAstConsumer
           }
         }
       } else {
-        ASTContext& ctx = decl_to_fwd_declare->getASTContext();
-        const clang::RawComment* declComment = ctx.getRawCommentForAnyRedecl(decl);
-        if (declComment != nullptr)
+        SourceLocation decl_end_location = decl->getSourceRange().getEnd();
+        if (LineHasText(decl_end_location, "// IWYU pragma: keep") ||
+            LineHasText(decl_end_location, "/* IWYU pragma: keep"))
         {
-          clang::SourceManager* sm = GlobalSourceManager();
-          clang::SourceRange range = declComment->getSourceRange();
-
-          clang::PresumedLoc startPos = sm->getPresumedLoc(range.getBegin());
-          clang::PresumedLoc endPos = sm->getPresumedLoc(range.getEnd());
-
-          StringRef rawText = declComment->getRawText(*sm);
-          if (rawText.find("IWYU pragma: keep") != StringRef::npos)
-          {
             definitely_keep_fwd_decl = true;
-          }
         }
       }
 
@@ -3956,9 +3946,6 @@ int main(int argc, char **argv) {
   std::unique_ptr<clang::CompilerInstance> compiler(CreateCompilerInstance(
       options_parser.clang_argc(), options_parser.clang_argv()));
   if (compiler) {
-    // Enable parsing all comments instead of just doxygen comments so we can place IWYU pragmas on forward declarations.
-    compiler->getLangOpts().CommentOpts.ParseAllComments = true;
-
     // Create and execute the frontend to generate an LLVM bitcode module.
     std::unique_ptr<clang::ASTFrontendAction> action(new IwyuAction);
     compiler->ExecuteAction(*action);

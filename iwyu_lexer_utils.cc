@@ -27,6 +27,7 @@ using clang::LangOptions;
 using clang::SourceLocation;
 using clang::SourceManager;
 using clang::SourceRange;
+using clang::StringRef;
 using clang::Token;
 using std::string;
 using std::vector;
@@ -48,14 +49,14 @@ const char* SourceManagerCharacterDataGetter::GetCharacterData(
   return data;
 }
 
-string GetSourceTextUntilEndOfLine(
+StringRef GetSourceTextUntilEndOfLine(
     SourceLocation start_loc,
     const CharacterDataGetterInterface& data_getter) {
   const char* data = data_getter.GetCharacterData(start_loc);
   const char* line_end = strchr(data, '\n');
   if (!line_end)
     return data;
-  return string(data, line_end - data);
+  return StringRef(data, line_end - data);
 }
 
 SourceLocation GetLocationAfter(
