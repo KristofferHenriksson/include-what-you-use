@@ -1,4 +1,4 @@
-//===--- comment_pragmas-d22.h - test input file for iwyu -----------------===//
+//===--- comment_pragmas-d23.h - test input file for iwyu -----------------===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -7,9 +7,10 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D22_H_
-#define INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D22_H_
+#ifndef INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D23_H_
+#define INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D23_H_
 
-class CommentPragmasD22 {};
+class CommentPragmasD23_1;  // IWYU pragma: keep
+class CommentPragmasD23_2;  /* IWYU pragma: keep */
 
-#endif  // INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D22_H_
+#endif  // INCLUDE_WHAT_YOU_USE_TESTS_CXX_COMMENT_PRAGMAS_D23_H_
